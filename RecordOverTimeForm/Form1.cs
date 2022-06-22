@@ -1,4 +1,5 @@
-﻿using RecordOverTimeForm.Common;
+﻿using RecordOverTimeForm.Business;
+using RecordOverTimeForm.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +38,7 @@ namespace RecordOverTimeForm
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -65,9 +66,9 @@ namespace RecordOverTimeForm
                 var overtimehours = "";
                 var coltb = this.Controls.Find("textbox" + controlnum, false);
                 if (i == 6) overtimehours = "3.5";
-                coltb[0].Text = i.ToString()+"    "+overtimehours+"hours";
+                coltb[0].Text = i.ToString() + "    " + overtimehours + "hours";
                 controlnum++;
-                
+
             }
         }
 
@@ -106,31 +107,41 @@ namespace RecordOverTimeForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            var date= Convert.ToDateTime(dateTimePicker1.Text);
-
+            var date = Convert.ToDateTime(dateTimePicker1.Text);
             var overTimeHovers = Convert.ToDouble(textBox42.Text);
-            
-            int dayOfWeek =Convert.ToInt32(date.DayOfWeek);
+            int dayOfWeek = Convert.ToInt32(date.DayOfWeek);
 
-            if (dayOfWeek < 6 && overTimeHovers>3.5) 
+            if (dayOfWeek < 6 && overTimeHovers > 3.5)
             {
                 DialogResult dialogResult = Popup.Tips(WorkDayError);
                 if (dialogResult.Equals(DialogResult.Yes))
                 {
                     textBox42.Text = "";
+                    return;
                 }
             }
-            else if(overTimeHovers > 7.5)
+            else if (overTimeHovers > 7.5)
             {
                 DialogResult dialogResult = Popup.Tips(WorkDayError);
                 if (dialogResult.Equals(DialogResult.Yes))
                 {
                     textBox42.Text = "";
+                    return;
                 }
             }
-            
-            
+
+            bool hasWrite = FileOperations.WriteIniFile(date, overTimeHovers);
+            if (hasWrite)
+            {
+                DialogResult dialogResult = Popup.Tips("保存成功");
+                if (dialogResult.Equals(DialogResult.Yes)) { }
+            }
+            else
+            {
+                DialogResult dialogResult = Popup.Tips("保存失败，请尝试重新提交");
+                if (dialogResult.Equals(DialogResult.Yes)) { }
+            }
+
         }
     }
 }
