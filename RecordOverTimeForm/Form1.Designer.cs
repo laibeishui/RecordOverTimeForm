@@ -89,6 +89,7 @@
             this.tb41 = new System.Windows.Forms.TextBox();
             this.tb35 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.unit = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // overtime
@@ -496,14 +497,15 @@
             this.submitOverTime.TabIndex = 6;
             this.submitOverTime.Text = "确定保存加班时间";
             this.submitOverTime.UseVisualStyleBackColor = true;
+            this.submitOverTime.Click += new System.EventHandler(this.submitOverTime_Click);
             // 
             // overTimeInput
             // 
-            this.overTimeInput.Location = new System.Drawing.Point(580, 134);
+            this.overTimeInput.Location = new System.Drawing.Point(509, 134);
             this.overTimeInput.Name = "overTimeInput";
             this.overTimeInput.Size = new System.Drawing.Size(100, 21);
             this.overTimeInput.TabIndex = 7;
-            this.overTimeInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox42_KeyPress);
+            this.overTimeInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.overTimeInput_KeyPress);
             // 
             // label2
             // 
@@ -517,7 +519,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(463, 137);
+            this.label3.Location = new System.Drawing.Point(402, 140);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 12);
             this.label3.TabIndex = 9;
@@ -609,11 +611,21 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "注：请不要删除电脑路径下 C:\\Users\\overtimeRecord  文件夹。数据保存在这里。";
             // 
+            // unit
+            // 
+            this.unit.AutoSize = true;
+            this.unit.Location = new System.Drawing.Point(621, 140);
+            this.unit.Name = "unit";
+            this.unit.Size = new System.Drawing.Size(65, 12);
+            this.unit.TabIndex = 13;
+            this.unit.Text = "单位(小时)";
+            // 
             // 计算加班时间
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(873, 593);
+            this.Controls.Add(this.unit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.watchOverTimeRecordTimePicker);
@@ -746,6 +758,7 @@
         private System.Windows.Forms.TextBox tb41;
         private System.Windows.Forms.TextBox tb35;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label unit;
     }
 }
 

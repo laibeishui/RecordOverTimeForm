@@ -40,7 +40,9 @@ namespace RecordOverTimeForm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void textBox42_KeyPress(object sender, KeyPressEventArgs e)
+
+
+        private void overTimeInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((int)e.KeyChar < 48 || (int)e.KeyChar > 57) && (int)e.KeyChar != 8 && (int)e.KeyChar != 46)
                 e.Handled = true;
@@ -67,51 +69,51 @@ namespace RecordOverTimeForm
             }
         }
 
-        private void SubmitOverTime_Click(object sender, EventArgs e)
-        {
-            var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
-            var overTimeHovers = Convert.ToDouble(overTimeInput.Text);
-            int dayOfWeek = Convert.ToInt32(date.DayOfWeek);
+       // private void SubmitOverTime_Click(object sender, EventArgs e)
+        //{
+        //    var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
+        //    var overTimeHovers = Convert.ToDouble(overTimeInput.Text);
+        //    int dayOfWeek = Convert.ToInt32(date.DayOfWeek);
 
-            // DayOfWeek 会返回0，需要改成 7
-            if (dayOfWeek == 0) dayOfWeek = 7;
+        //    // DayOfWeek 会返回0，需要改成 7
+        //    if (dayOfWeek == 0) dayOfWeek = 7;
 
-            if (dayOfWeek < 6 && overTimeHovers > 3.5)
-            {
-                DialogResult dialogResult = Popup.Tips(WorkDayError);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    overTimeInput.Text = "";
-                    return;
-                }
-            }
-            else if (overTimeHovers > 7.5)
-            {
-                DialogResult dialogResult = Popup.Tips(WorkDayError);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    overTimeInput.Text = "";
-                    return;
-                }
-            }
+        //    if (dayOfWeek < 6 && overTimeHovers > 3.5)
+        //    {
+        //        DialogResult dialogResult = Popup.Tips(WorkDayError);
+        //        if (dialogResult.Equals(DialogResult.Yes))
+        //        {
+        //            overTimeInput.Text = "";
+        //            return;
+        //        }
+        //    }
+        //    else if (overTimeHovers > 7.5)
+        //    {
+        //        DialogResult dialogResult = Popup.Tips(WorkDayError);
+        //        if (dialogResult.Equals(DialogResult.Yes))
+        //        {
+        //            overTimeInput.Text = "";
+        //            return;
+        //        }
+        //    }
 
-            bool hasWrite = FileOperations.WriteIniFile(date, overTimeHovers);
-            if (hasWrite)
-            {
-                DialogResult dialogResult = Popup.Tips("保存成功");
-                if (dialogResult.Equals(DialogResult.Yes)|| dialogResult.Equals(DialogResult.No)) 
-                {
-                    ShowDates(DateTime.Now);
-                    LabelShowTime();
-                }
-            }
-            else
-            {
-                DialogResult dialogResult = Popup.Tips("保存失败，请尝试重新提交");
-                if (dialogResult.Equals(DialogResult.Yes)) { }
-            }
+        //    bool hasWrite = FileOperations.WriteIniFile(date, overTimeHovers);
+        //    if (hasWrite)
+        //    {
+        //        DialogResult dialogResult = Popup.Tips("保存成功");
+        //        if (dialogResult.Equals(DialogResult.Yes)|| dialogResult.Equals(DialogResult.No)) 
+        //        {
+        //            ShowDates(DateTime.Now);
+        //            LabelShowTime();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        DialogResult dialogResult = Popup.Tips("保存失败，请尝试重新提交");
+        //        if (dialogResult.Equals(DialogResult.Yes)) { }
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// 展示某月和当月加班时间
@@ -135,7 +137,7 @@ namespace RecordOverTimeForm
             for (var i = 1; i <= monthCount; i++)
             {
                 var coltb = this.Controls.Find("tb" + controlnum, false);
-                if (readDicKeyList != null && readDicKeyList.Count != 0 && readDicKeyList.Contains(i))
+                if (readDicKeyList != null && readDicKeyList.Count != 0 && readDicKeyList.Contains(i) && readDic[i]!=0)
                 {
                     coltb[0].Text = i.ToString() + "  " + readDic[i].ToString() + "小时";
                     coltb[0].BackColor = Color.Yellow;
@@ -210,6 +212,51 @@ namespace RecordOverTimeForm
                 coltb[0].Text = "";
                 coltb[0].BackColor= Color.White;
                 coltb[0].Visible = false;
+            }
+        }
+
+        private void submitOverTime_Click(object sender, EventArgs e)
+        {
+            var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
+            var overTimeHovers = Convert.ToDouble(overTimeInput.Text);
+            int dayOfWeek = Convert.ToInt32(date.DayOfWeek);
+
+            // DayOfWeek 会返回0，需要改成 7
+            if (dayOfWeek == 0) dayOfWeek = 7;
+
+            if (dayOfWeek < 6 && overTimeHovers > 3.5)
+            {
+                DialogResult dialogResult = Popup.Tips(WorkDayError);
+                if (dialogResult.Equals(DialogResult.Yes))
+                {
+                    overTimeInput.Text = "";
+                    return;
+                }
+            }
+            else if (overTimeHovers > 7.5)
+            {
+                DialogResult dialogResult = Popup.Tips(WorkDayError);
+                if (dialogResult.Equals(DialogResult.Yes))
+                {
+                    overTimeInput.Text = "";
+                    return;
+                }
+            }
+
+            bool hasWrite = FileOperations.WriteIniFile(date, overTimeHovers);
+            if (hasWrite)
+            {
+                DialogResult dialogResult = Popup.Tips("保存成功");
+                if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
+                {
+                    ShowDates(DateTime.Now);
+                    LabelShowTime();
+                }
+            }
+            else
+            {
+                DialogResult dialogResult = Popup.Tips("保存失败，请尝试重新提交");
+                if (dialogResult.Equals(DialogResult.Yes)) { }
             }
         }
     }
