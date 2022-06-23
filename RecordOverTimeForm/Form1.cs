@@ -69,51 +69,6 @@ namespace RecordOverTimeForm
             }
         }
 
-       // private void SubmitOverTime_Click(object sender, EventArgs e)
-        //{
-        //    var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
-        //    var overTimeHovers = Convert.ToDouble(overTimeInput.Text);
-        //    int dayOfWeek = Convert.ToInt32(date.DayOfWeek);
-
-        //    // DayOfWeek 会返回0，需要改成 7
-        //    if (dayOfWeek == 0) dayOfWeek = 7;
-
-        //    if (dayOfWeek < 6 && overTimeHovers > 3.5)
-        //    {
-        //        DialogResult dialogResult = Popup.Tips(WorkDayError);
-        //        if (dialogResult.Equals(DialogResult.Yes))
-        //        {
-        //            overTimeInput.Text = "";
-        //            return;
-        //        }
-        //    }
-        //    else if (overTimeHovers > 7.5)
-        //    {
-        //        DialogResult dialogResult = Popup.Tips(WorkDayError);
-        //        if (dialogResult.Equals(DialogResult.Yes))
-        //        {
-        //            overTimeInput.Text = "";
-        //            return;
-        //        }
-        //    }
-
-        //    bool hasWrite = FileOperations.WriteIniFile(date, overTimeHovers);
-        //    if (hasWrite)
-        //    {
-        //        DialogResult dialogResult = Popup.Tips("保存成功");
-        //        if (dialogResult.Equals(DialogResult.Yes)|| dialogResult.Equals(DialogResult.No)) 
-        //        {
-        //            ShowDates(DateTime.Now);
-        //            LabelShowTime();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        DialogResult dialogResult = Popup.Tips("保存失败，请尝试重新提交");
-        //        if (dialogResult.Equals(DialogResult.Yes)) { }
-        //    }
-
-        //}
 
         /// <summary>
         /// 展示某月和当月加班时间
