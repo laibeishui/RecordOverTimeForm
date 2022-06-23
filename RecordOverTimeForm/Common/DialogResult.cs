@@ -7,9 +7,8 @@ using System.Windows.Forms;
 
 namespace RecordOverTimeForm.Common
 {
-    class Popup
+    public class Popup
     {
-        #region  公有方法
         /// <summary>
         /// 弹窗提示
         /// </summary>
@@ -37,6 +36,7 @@ namespace RecordOverTimeForm.Common
             return dialogResult;
         }
 
+
         //弹窗类型
         public enum PopUpType
         {
@@ -47,15 +47,6 @@ namespace RecordOverTimeForm.Common
             //问题
             question,
         }
-
-        #endregion
-
-
-        #region   私有方法
-
-
-        #endregion
-
 
     }
 }

@@ -10,6 +10,7 @@ namespace RecordOverTimeForm.Utils
 {
     public class IniHelper
     {
+
         /// <summary>
         /// 读取INI文件值
         /// </summary>
@@ -26,6 +27,7 @@ namespace RecordOverTimeForm.Utils
             return sb.ToString();
         }
 
+
         /// <summary>
         /// 写INI文件值
         /// </summary>
@@ -40,6 +42,7 @@ namespace RecordOverTimeForm.Utils
             return WritePrivateProfileString(section, key, value, filePath);
         }
 
+
         /// <summary>
         /// 删除节
         /// </summary>
@@ -50,6 +53,7 @@ namespace RecordOverTimeForm.Utils
         {
             return Write(section, null, null, filePath);
         }
+
 
         /// <summary>
         /// 删除键的值
@@ -63,6 +67,7 @@ namespace RecordOverTimeForm.Utils
             return Write(section, key, null, filePath);
         }
 
+
         /// <summary>
         /// 为INI文件中指定的节点取得字符串
         /// </summary>
@@ -75,6 +80,7 @@ namespace RecordOverTimeForm.Utils
         /// <returns>复制到lpReturnedString缓冲区的字节数量，其中不包括那些NULL中止字符</returns>
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
+
 
         /// <summary>
         /// 修改INI文件中内容

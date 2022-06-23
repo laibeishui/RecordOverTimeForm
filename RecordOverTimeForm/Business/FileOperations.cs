@@ -8,61 +8,30 @@ using System.Threading.Tasks;
 
 namespace RecordOverTimeForm.Business
 {
-    public class FileOperations
+    public static class FileOperations
     {
-
-        //string filePath = Path.Combine(_diaryFilePath, date.Year.ToString(), date.Month.ToString(), "dairy" + date.Day.ToString() + ".ini");
-
-        private static string _baseFilePath = @"C:/Users/overtimeRecord";
-
-        //public List<Diary> GetDiaryList()
-        //{
-        //    List<Diary> diaries = new List<Diary>();
-        //    string[] yearDirs = Directory.GetDirectories(_diaryFilePath);
-        //    foreach (var ydir in yearDirs)
-        //    {
-        //        string[] monthDirs = Directory.GetDirectories(ydir);
-        //        foreach (var mdir in monthDirs)
-        //        {
-        //            string[] iniFiles = Directory.GetFiles(mdir, "*");
-        //            diaries.AddRange(ReadIniFiles(iniFiles));
-        //        }
-        //    }
-
-        //    return diaries.OrderBy(x => x.Date).ToList();
-        //}
-
+        private static readonly string _baseFilePath = @"C:/Users/overtimeRecord";
 
         /// <summary>
         /// 读取Ini  文件
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
-        public static Dictionary<int, double> ReadIniFile(DateTime date, int count)
+        public static Dictionary<int, double> ReadIniFile(DateTime date)
         {
-            //var diaries = new List<Diary>();
-            //foreach (var path in paths)
-            //{
-            //    var diary = new Diary();
-            //    diary.DiaryId = Guid.Parse(IniHelper.Read("diary", "DiaryId", null, path));
-            //    diary.Date = DateTime.Parse(IniHelper.Read("diary", "Date", null, path));
-            //    diary.Weather = IniHelper.Read("diary", "Weather", null, path);
-            //    diary.Content = Encoding.UTF8.DecodeBase64(IniHelper.Read("diary", "Content", null, path));
-            //    diaries.Add(diary);
-            //}
+            string filePath = GetFilePath(date);
+            if (string.IsNullOrEmpty(filePath)) return null;
 
-            if (GetFilePath(date) == null) return null; 
-            
+            int month = date.Month;
 
+            var dayCount = date.CountOfMonth();
 
-            
-
-            int i = 0;
-
+            int i = 1;
             Dictionary<int, double> overtimeKV = new Dictionary<int, double>();
-            while (i < count)
+            while (i <= dayCount)
             {
-                var overtimevValue = Convert.ToDouble(IniHelper.Read("", i.ToString(), null, path));
+                var overtimevValueStr = IniHelper.Read(month.ToString(), i.ToString(), null, filePath);
+                var overtimevValue = string.IsNullOrEmpty(overtimevValueStr) ? 0 : Convert.ToDouble(overtimevValueStr);
                 if (overtimevValue != 0)
                 {
                     overtimeKV.Add(i, overtimevValue);
@@ -74,7 +43,13 @@ namespace RecordOverTimeForm.Business
             return overtimeKV;
         }
 
-        private static  string CheckFilePath(DateTime date)
+
+        /// <summary>
+        /// 通过日期检查文件路径
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        private static string CheckFilePath(DateTime date)
         {
             FileHelper.CreateDirectory(_baseFilePath);
 
@@ -82,15 +57,21 @@ namespace RecordOverTimeForm.Business
             string yearPath = Path.Combine(_baseFilePath, year);
             FileHelper.CreateDirectory(yearPath);
 
-            string filePath = Path.Combine(_baseFilePath, date.Year.ToString(), "overtimeRecord" + date.Month.ToString()  + ".ini");
+            string filePath = Path.Combine(_baseFilePath, date.Year.ToString(), "overtimeRecord" + date.Month.ToString() + ".ini");
             FileHelper.CrateFile(filePath);
 
             return filePath;
         }
 
+
+        /// <summary>
+        /// 通过日期获取文件路径
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         private static string GetFilePath(DateTime date)
         {
-            var filePath=Path.Combine(_baseFilePath, date.Year.ToString(), "overtimeRecord" + date.Month.ToString() + ".ini");
+            var filePath = Path.Combine(_baseFilePath, date.Year.ToString(), "overtimeRecord" + date.Month.ToString() + ".ini");
 
             if (!File.Exists(filePath))
             {
@@ -100,12 +81,17 @@ namespace RecordOverTimeForm.Business
             return filePath;
         }
 
-        public static  bool WriteIniFile(DateTime date, double overtime)
+
+        /// <summary>
+        /// 写入ini 文件
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="overtime"></param>
+        /// <returns></returns>
+        public static bool WriteIniFile(DateTime date, double overtime)
         {
             string filePath = CheckFilePath(date);
-            bool Haswrite = IniHelper.Write(date.Month.ToString(), date.Day.ToString(), overtime.ToString(), filePath) != 0;
-
-            return Haswrite;
+            return IniHelper.Write(date.Month.ToString(), date.Day.ToString(), overtime.ToString(), filePath) != 0;
         }
     }
 }
