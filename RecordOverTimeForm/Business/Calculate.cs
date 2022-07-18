@@ -54,6 +54,7 @@ namespace RecordOverTimeForm.Business
         public static double CalculateHadOverTime()
         {
             var overTimeDic = FileOperations.ReadIniFile(DateTime.Now);
+            if (overTimeDic == null) return 0;
             return overTimeDic.Values.ToList().Sum();
         }
 
