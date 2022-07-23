@@ -182,7 +182,7 @@ namespace RecordOverTimeForm
             if (dayOfWeek < 6 && overTimeHovers > 3.5)
             {
                 DialogResult dialogResult = Popup.Tips(WorkDayError);
-                if (dialogResult.Equals(DialogResult.Yes))
+                if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
                 {
                     overTimeInput.Text = "";
                     return;
@@ -190,8 +190,8 @@ namespace RecordOverTimeForm
             }
             else if (overTimeHovers > 7.5)
             {
-                DialogResult dialogResult = Popup.Tips(WorkDayError);
-                if (dialogResult.Equals(DialogResult.Yes))
+                DialogResult dialogResult = Popup.Tips(FreeDayError);
+                if (dialogResult.Equals(DialogResult.Yes)||dialogResult.Equals(DialogResult.No))
                 {
                     overTimeInput.Text = "";
                     return;
