@@ -172,6 +172,7 @@ namespace RecordOverTimeForm
 
         private void submitOverTime_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(overTimeInput.Text)) return;
             var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
             var overTimeHovers = Convert.ToDouble(overTimeInput.Text);
             int dayOfWeek = Convert.ToInt32(date.DayOfWeek);
