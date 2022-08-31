@@ -527,12 +527,12 @@
             // 
             // watchOverTimeRecordTimePicker
             // 
-            this.watchOverTimeRecordTimePicker.CustomFormat = "yyyy-MM";
+            this.watchOverTimeRecordTimePicker.CustomFormat = "yyyy-MM-dd";
             this.watchOverTimeRecordTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.watchOverTimeRecordTimePicker.Location = new System.Drawing.Point(158, 181);
             this.watchOverTimeRecordTimePicker.Name = "watchOverTimeRecordTimePicker";
             this.watchOverTimeRecordTimePicker.ShowUpDown = true;
-            this.watchOverTimeRecordTimePicker.Size = new System.Drawing.Size(200, 21);
+            this.watchOverTimeRecordTimePicker.Size = new System.Drawing.Size(64, 21);
             this.watchOverTimeRecordTimePicker.TabIndex = 10;
             this.watchOverTimeRecordTimePicker.ValueChanged += new System.EventHandler(this.watchOverTimeRecordTimePicker_ValueChanged);
             // 
