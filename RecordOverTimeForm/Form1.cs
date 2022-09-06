@@ -1,5 +1,6 @@
 ﻿using RecordOverTimeForm.Business;
 using RecordOverTimeForm.Common;
+using RecordOverTimeForm.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,10 @@ namespace RecordOverTimeForm
 {
     public partial class 计算加班时间 : Form
     {
+        public static List<HolidayDto> holidays = HolidayNotice.GetHolidayList();
+
+        public Calculate calculate = new Calculate(holidays);
+
         public static string WorkDayError = "工作日加班时长不超过3.5小时！ ";
 
         public static string FreeDayError = "休息日加班时长不超过7.5小时！ ";
@@ -76,7 +81,6 @@ namespace RecordOverTimeForm
         private void ShowDates(DateTime date)
         {
             TextBoxInit();
-
             var firstDayOfMonth = date.AddDays(1 - date.Day);
             var year = date.Year;
             var month = date.Month;
@@ -91,19 +95,64 @@ namespace RecordOverTimeForm
             var readDicKeyList = readDic?.Keys.ToList();
             for (var i = 1; i <= monthCount; i++)
             {
+                var day = firstDayOfMonth.AddDays(i - 1);
+                var dayType = HolidayNotice.GetDayType(day,holidays);
+                
+                var cc = new ChineseCalendar(day);
                 var coltb = this.Controls.Find("tb" + controlnum, false);
+                if (dayType == dayType.假期)
+                {
+                    coltb[0].BackColor = Color.LightGreen;
+                    coltb[0].ForeColor = Color.Black;
+                }
+                else if (dayType == dayType.周末)
+                {
+                    coltb[0].BackColor = Color.SkyBlue;
+                    coltb[0].ForeColor = Color.Black;
+                }
+                else if (dayType == dayType.工作)
+                {
+                    coltb[0].BackColor = Color.LightPink;
+                    coltb[0].ForeColor = Color.Black;
+                }
+                else if (dayType == dayType.调休)
+                {
+                    coltb[0].BackColor = Color.OrangeRed;
+                    coltb[0].ForeColor = Color.White;
+                }
+                var calendarCellText = "\r\n农历：" + cc.ChineseMonthData + "\r\n"+ dayType.ToString() + "\r\n" + GetHolidayStr(cc);
                 if (readDicKeyList != null && readDicKeyList.Count != 0 && readDicKeyList.Contains(i) && readDic[i]!=0)
                 {
-                    coltb[0].Text = i.ToString() + "  " + readDic[i].ToString() + "小时";
+                    coltb[0].Text = i.ToString() + "  " + readDic[i].ToString() + "小时"+ calendarCellText;
                     coltb[0].BackColor = Color.Yellow;
                 }
                 else
                 {
-                    coltb[0].Text = i.ToString();
+                    coltb[0].Text = i.ToString()+calendarCellText;
                 }
                 coltb[0].Visible = true;
                 controlnum++;
             }
+        }
+
+        /// <summary>
+        /// 获取节日字符串
+        /// </summary>
+        private string GetHolidayStr(ChineseCalendar cc)
+        {
+            var holidayStr = string.Empty;
+            if (!string.IsNullOrEmpty(cc.ChineseCalendarHoliday))
+            {
+                holidayStr = cc.ChineseCalendarHoliday;
+            }
+
+            if (!string.IsNullOrEmpty(cc.DateHoliday))
+            {
+                if (!string.IsNullOrEmpty(holidayStr))
+                    holidayStr += "|";
+                holidayStr += cc.DateHoliday;
+            }
+            return holidayStr;
         }
 
 
@@ -112,13 +161,13 @@ namespace RecordOverTimeForm
         /// </summary>
         private void LabelShowTime()
         {
-            var extraOvertime = Calculate.CallculateAllTime();
+            var freeDayCount = calculate.GetFreeDayCount();
+            var workDayCount = calculate._monthCount - freeDayCount;
 
-            label4.Text = $"这个月总共有 {Calculate._monthWorkDayCount} 个工作日，所以你需要加班的时长为 {Calculate.CallculateAllTime()}+40 = {extraOvertime + 40} 个小时";
+            label4.Text = $"这个月总共有 {workDayCount} 个工作日，所以你需要加班的时长为 {workDayCount*0.5+40} 个小时";
 
-            overtime.Text = $" 这个月你一共加班了{Calculate.CalculateHadOverTime()}小时的班";
+            overtime.Text = $" 这个月你一共加班了{calculate.CalculateHadOverTime()}小时的班";
 
-            LastOverTimeShow();
         }
 
 
@@ -141,20 +190,8 @@ namespace RecordOverTimeForm
         /// <param name="e"></param>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            LastOverTimeShow();
+           
         }
-
-
-        /// <summary>
-        /// 显示还能再加多长时间班的方法
-        /// </summary>
-        private void LastOverTimeShow()
-        {
-            lastovertime.Text = includeWeek.Checked ?
-                $"这个月你撑死还能再加{Calculate.CalculateLastOverTime()}小时(不包含今天)"
-                : $"这个月你撑死还能再加{Calculate.CalculateLastOverTimeWithoutWeek()}小时(不包含今天)";
-        }
-
 
         /// <summary>
         /// 初始化日期列表
@@ -174,13 +211,10 @@ namespace RecordOverTimeForm
         {
             if (string.IsNullOrEmpty(overTimeInput.Text)) return;
             var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
+            var dayType = HolidayNotice.GetDayType(date, holidays);
             var overTimeHovers = Convert.ToDouble(overTimeInput.Text);
-            int dayOfWeek = Convert.ToInt32(date.DayOfWeek);
 
-            // DayOfWeek 会返回0，需要改成 7
-            if (dayOfWeek == 0) dayOfWeek = 7;
-
-            if (dayOfWeek < 6 && overTimeHovers > 3.5)
+            if ((dayType ==dayType.工作||dayType==dayType.调休)&&overTimeHovers>3.5)
             {
                 DialogResult dialogResult = Popup.Tips(WorkDayError);
                 if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
@@ -214,6 +248,11 @@ namespace RecordOverTimeForm
                 DialogResult dialogResult = Popup.Tips("保存失败，请尝试重新提交");
                 if (dialogResult.Equals(DialogResult.Yes)) { }
             }
+        }
+
+        private void tb8_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

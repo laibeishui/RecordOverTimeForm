@@ -16,61 +16,87 @@ namespace RecordOverTimeForm.Business
         public static readonly int _month = _now.Month;
 
         // 本月总共有多少天
-        public static readonly int _monthCount = DateTime.DaysInMonth(_year, _month);
+        public readonly int _monthCount = DateTime.DaysInMonth(_year, _month);
 
-        // 本月总共有多少休息天
-        public static readonly int _monthFreeDayCount = DateHelper.CountOfWeekNumberInMonth(_monthCount, _now.GetFirstDayByADayInMonth());
+        public static List<HolidayDto> _holidays = new List<HolidayDto>();
 
-        // 本月总共有多少工作日
-        public static readonly int _monthWorkDayCount = _monthCount - _monthFreeDayCount;
-
-        // 本月还剩下多少天 (不包括今天)
-        public static readonly int _lastMonthCount = _monthCount - _now.Day;
-
-        // 本月还剩下多少休息天（不包括今天）        
-        public static readonly int _lastMonthFreeDayCount = DateHelper.CountOfLastWeekNumberInMonth(_lastMonthCount, _now);
-
-        // 本月还剩下多少工作日  （不包括今天）
-        public static readonly int _lastMonthWorkDayCount = _lastMonthCount - _lastMonthFreeDayCount;
-
-
-        /// <summary>
-        /// 计算本月总共需要加多少班
-        /// </summary>
-        /// <returns></returns>
-        public static double CallculateAllTime() => _monthWorkDayCount * 0.5;
-
-        /// <summary>
-        /// 计算本月总共可以加多少时间的班
-        /// </summary>
-        /// <returns></returns>
-        public static double CalculateOverTime() => _monthFreeDayCount * 7.5 + _monthWorkDayCount * 3.5;
+        public Calculate(List<HolidayDto> holidays)
+        {
+            _holidays = holidays;
+        }
 
 
         /// <summary>
         /// 计算本月已经加了多少天的班
         /// </summary>
         /// <returns></returns>
-        public static double CalculateHadOverTime()
+        public  double CalculateHadOverTime()
         {
             var overTimeDic = FileOperations.ReadIniFile(DateTime.Now);
             if (overTimeDic == null) return 0;
             return overTimeDic.Values.ToList().Sum();
         }
 
+        /// <summary>
+        /// 获取所有的假期时间
+        /// </summary>
+        /// <param name="holidays"></param>
+        /// <returns></returns>
+        private  List<string> GetAllHolidays()
+        {
+            var allHolidays = new List<string>();
+            _holidays.ForEach(h =>
+            {
+                allHolidays.AddRange(h.HolidayDays);
+            });
+
+            return allHolidays;
+        }
 
         /// <summary>
-        /// 计算剩余加班时间
+        /// 获取所有的调休时间
         /// </summary>
+        /// <param name="holidays"></param>
         /// <returns></returns>
-        public static double CalculateLastOverTime() => _lastMonthFreeDayCount * 7.5 + _lastMonthWorkDayCount * 3.5;
+        public  List<string> GetAllLeaveinlieuDays()
+        {
+            var allLeaveinlieuday = new List<string>();
+            _holidays.ForEach(h =>
+            {
+                allLeaveinlieuday.AddRange(h.LeaveinlieuDays);
+            });
 
+            return allLeaveinlieuday;
+        }
 
         /// <summary>
-        /// 计算剩余加班时间不包括周六周日
+        /// 获取一个月的所有休息天数
         /// </summary>
         /// <returns></returns>
-        public static double CalculateLastOverTimeWithoutWeek() => _lastMonthWorkDayCount * 3.5;
+        public int GetFreeDayCount()
+        {
+            var firstDayinMonth = _now.GetFirstDayByADayInMonth();
+            var weekDayCount = DateHelper.CountOfWeekNumberInMonth(_monthCount, firstDayinMonth, _holidays);
+            int flagMonth = firstDayinMonth.Month;
+            int holidayCount = 0;
+            var holidaysList = GetAllHolidays();
+            holidaysList.ForEach(x =>
+            {
+                var temp = Convert.ToDateTime(x);
+                if (temp.Month == flagMonth && temp.DayOfWeek != DayOfWeek.Saturday && temp.DayOfWeek != DayOfWeek.Sunday)
+                    holidayCount++;
+            });
 
+            int leaveinlieuDayCount = 0;
+            var leaveinlieuDaysList = GetAllLeaveinlieuDays();
+            leaveinlieuDaysList.ForEach(x =>
+            {
+                var temp = Convert.ToDateTime(x);
+                if (temp.Month == flagMonth && temp.DayOfWeek == DayOfWeek.Saturday && temp.DayOfWeek == DayOfWeek.Sunday)
+                    leaveinlieuDayCount++;
+            });
+
+            return weekDayCount + holidayCount - leaveinlieuDayCount;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using RecordOverTimeForm.Utils;
+﻿using Newtonsoft.Json;
+using RecordOverTimeForm.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,7 +43,6 @@ namespace RecordOverTimeForm.Business
 
             return overtimeKV;
         }
-
 
         /// <summary>
         /// 通过日期检查文件路径
@@ -92,6 +92,35 @@ namespace RecordOverTimeForm.Business
         {
             string filePath = CheckFilePath(date);
             return IniHelper.Write(date.Month.ToString(), date.Day.ToString(), overtime.ToString(), filePath) != 0;
+        }
+
+        /// <summary>
+        /// 从文本中获取节假日信息
+        /// </summary>
+        /// <returns></returns>
+        public static List<HolidayDto> ReadHolidaysFile()
+        {
+            var year = DateTime.Now.Year;
+            string filePath = _baseFilePath + "\\holidayNoticeDataOf" + year.ToString() + ".txt";
+            var holidays = new List<HolidayDto>();
+            if (!File.Exists(filePath))
+                return holidays;
+
+            var json = File.ReadAllText(filePath, Encoding.UTF8);
+            if (!string.IsNullOrWhiteSpace(json))
+                holidays = JsonConvert.DeserializeObject<List<HolidayDto>>(json);
+            return holidays;
+        }
+
+        /// <summary>
+        /// 写入节假日信息文本
+        /// </summary>
+        /// <param name="holidays"></param>
+        public static void WriteHolidaysFile(List<HolidayDto> holidays)
+        {
+            var year = DateTime.Now.Year;
+            string filePath = _baseFilePath + "\\holidayNoticeDataOf" + year.ToString() + ".txt";
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(holidays));
         }
     }
 }

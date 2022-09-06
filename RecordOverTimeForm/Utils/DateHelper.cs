@@ -13,7 +13,6 @@ namespace RecordOverTimeForm.Utils
         /// </summary>
         public static int CountOfLastWeekNumberInMonth(int lastMonthCount, DateTime today)
         {
-            // var countOfLastDay = _monthCount - _now.Day;
             int i = 1;
             int lastWeekCount = 0;
             while (i < lastMonthCount)
@@ -39,7 +38,6 @@ namespace RecordOverTimeForm.Utils
             return lastWeekCount;
         }
 
-
         /// <summary>
         /// 通过本月的某一天获取当月的第一天
         /// </summary>
@@ -49,13 +47,14 @@ namespace RecordOverTimeForm.Utils
 
 
         /// <summary>
-        /// 获取本月总共有多少天休息日
+        /// 获取本月总共有多少天周六周日
         /// </summary>
         /// <returns></returns>
-        public static int CountOfWeekNumberInMonth(int monthCount, DateTime firstdayinMonth)
+        public static int CountOfWeekNumberInMonth(int monthCount, DateTime firstdayinMonth, List<HolidayDto> holidays)
         {
             int i = 1;
             int weekCount = 0;
+            int flagMonth = firstdayinMonth.Month;
             while (i < monthCount)
             {
                 int k = i;
@@ -76,6 +75,8 @@ namespace RecordOverTimeForm.Utils
                 }
             }
 
+            
+
             return weekCount;
         }
 
@@ -90,6 +91,39 @@ namespace RecordOverTimeForm.Utils
             var year = date.Year;
             var month = date.Month;
             return DateTime.DaysInMonth(year, month);
+        }
+
+
+        /// <summary>
+        /// 获取所有的假期时间
+        /// </summary>
+        /// <param name="holidays"></param>
+        /// <returns></returns>
+        public static List<string> GetAllHolidays(List<HolidayDto> holidays)
+        {
+            var allHolidays = new List<string>();
+            holidays.ForEach(h =>
+            {
+                allHolidays.AddRange(h.HolidayDays);
+            });
+
+            return allHolidays;
+        }
+
+        /// <summary>
+        /// 获取所有的调休时间
+        /// </summary>
+        /// <param name="holidays"></param>
+        /// <returns></returns>
+        public static List<string> GetAllLeaveinlieuDays(List<HolidayDto> holidays)
+        {
+            var allLeaveinlieuday = new List<string>();
+            holidays.ForEach(h =>
+            {
+                allLeaveinlieuday.AddRange(h.LeaveinlieuDays);
+            });
+
+            return allLeaveinlieuday;
         }
     }
 }
