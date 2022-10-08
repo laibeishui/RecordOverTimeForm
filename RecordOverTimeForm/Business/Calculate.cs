@@ -92,7 +92,7 @@ namespace RecordOverTimeForm.Business
             leaveinlieuDaysList.ForEach(x =>
             {
                 var temp = Convert.ToDateTime(x);
-                if (temp.Month == flagMonth && temp.DayOfWeek == DayOfWeek.Saturday && temp.DayOfWeek == DayOfWeek.Sunday)
+                if (temp.Month == flagMonth && (temp.DayOfWeek == DayOfWeek.Saturday || temp.DayOfWeek == DayOfWeek.Sunday))
                     leaveinlieuDayCount++;
             });
 

@@ -163,9 +163,7 @@ namespace RecordOverTimeForm
         {
             var freeDayCount = calculate.GetFreeDayCount();
             var workDayCount = calculate._monthCount - freeDayCount;
-
             label4.Text = $"这个月总共有 {workDayCount} 个工作日，所以你需要加班的时长为 {workDayCount*0.5+40} 个小时";
-
             overtime.Text = $" 这个月你一共加班了{calculate.CalculateHadOverTime()}小时的班";
 
         }
