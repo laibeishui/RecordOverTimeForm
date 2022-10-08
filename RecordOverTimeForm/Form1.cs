@@ -125,6 +125,7 @@ namespace RecordOverTimeForm
                 {
                     coltb[0].Text = i.ToString() + "  " + readDic[i].ToString() + "小时"+ calendarCellText;
                     coltb[0].BackColor = Color.Yellow;
+                    coltb[0].ForeColor = Color.Black;
                 }
                 else
                 {
