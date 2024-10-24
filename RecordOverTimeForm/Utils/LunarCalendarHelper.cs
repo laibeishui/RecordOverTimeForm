@@ -1,21 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RecordOverTimeForm.Utils
+﻿namespace RecordOverTimeForm.Utils
 {
-    public class LunarCalendarHelper
-    {
-        public void Test()
-        {
-            var day = DateTime.Now;
-        }
-    }
-
-
-
     /// <summary>
     /// 阳历假期
     /// </summary>

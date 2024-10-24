@@ -87,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Calculate.cs" />
-    <Compile Include="Business\DayType.cs" />
     <Compile Include="Business\FileOperations.cs" />
     <Compile Include="Common\DialogResult.cs" />
     <Compile Include="Form1.cs">
@@ -105,7 +104,6 @@
     <Compile Include="Utils\LunarCalendarHelper.cs" />
     <Compile Include="Utils\ChineseCalendar.cs" />
     <Compile Include="Utils\HolidayNotice.cs" />
-    <Compile Include="Utils\RegexHelper.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
