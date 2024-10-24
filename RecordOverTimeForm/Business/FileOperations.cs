@@ -2,6 +2,7 @@
 using RecordOverTimeForm.Utils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace RecordOverTimeForm.Business
 {
     public static class FileOperations
     {
-        private static readonly string _baseFilePath = @"C:/Users/overtimeRecord";
+        private static readonly string _baseFilePath = @"C:/Users/overtimeRecord/";
 
         /// <summary>
         /// 读取Ini  文件
@@ -101,26 +102,18 @@ namespace RecordOverTimeForm.Business
         public static List<HolidayDto> ReadHolidaysFile()
         {
             var year = DateTime.Now.Year;
-            string filePath = _baseFilePath + "\\holidayNoticeDataOf" + year.ToString() + ".txt";
+            var fileName = "holidayNoticeDataOf" + year.ToString() + ".txt";
+            string filePath = _baseFilePath + "\\" + fileName;
             var holidays = new List<HolidayDto>();
             if (!File.Exists(filePath))
-                return holidays;
-
-            var json = File.ReadAllText(filePath, Encoding.UTF8);
-            if (!string.IsNullOrWhiteSpace(json))
-                holidays = JsonConvert.DeserializeObject<List<HolidayDto>>(json);
+            {
+                FileHelper.CreateDirectory(_baseFilePath);
+                new HttpClientHelper().DownLoad($"{ConfigurationManager.AppSettings["HolidaysDownloadUrl"]}/{fileName}", filePath);
+            }
+            var readJson = File.ReadAllText(filePath, Encoding.UTF8);
+            if (!string.IsNullOrWhiteSpace(readJson))
+                holidays = JsonConvert.DeserializeObject<List<HolidayDto>>(readJson);
             return holidays;
-        }
-
-        /// <summary>
-        /// 写入节假日信息文本
-        /// </summary>
-        /// <param name="holidays"></param>
-        public static void WriteHolidaysFile(List<HolidayDto> holidays)
-        {
-            var year = DateTime.Now.Year;
-            string filePath = _baseFilePath + "\\holidayNoticeDataOf" + year.ToString() + ".txt";
-            File.WriteAllText(filePath, JsonConvert.SerializeObject(holidays));
         }
     }
 }

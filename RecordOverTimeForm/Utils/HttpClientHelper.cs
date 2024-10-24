@@ -3,12 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RecordOverTimeForm.Utils
 {
@@ -38,19 +36,11 @@ namespace RecordOverTimeForm.Utils
                 AddHeaders(httpRequestMessage, requestHeaders);
                 var response = client.SendAsync(httpRequestMessage).Result;
                 var data = response.Content.ReadAsStringAsync().Result;
-
-                if (stopwatch.ElapsedMilliseconds >= 500)
-                {
-                    //Log4NetHelper.WarnFormat("对外请求操过500ms,请求时长:{0}ms,url:{1},requestHeaders:{2},返回结果:{3}",
-                    //                stopwatch.ElapsedMilliseconds, allUrl, JsonConvert.SerializeObject(requestHeaders), data);
-                } 
-
                 return data;
             }
             catch (Exception ex)
             {
-                //Log4NetHelper.ErrorLog($"Get 请求出错,errormsg:{ex.Message},url:{FormatUrl(url, content)},requestHeaders:{JsonConvert.SerializeObject(requestHeaders)}", ex);
-                throw;
+                throw ex;
             }
         }
 
@@ -79,18 +69,11 @@ namespace RecordOverTimeForm.Utils
                 AddHeaders(httpRequestMessage, requestHeaders);
                 var response = client.SendAsync(httpRequestMessage).Result;
                 var result = response.Content.ReadAsStringAsync().Result;
-
-                if (stopwatch.ElapsedMilliseconds >= 500 && !IgnoreLog(url))
-                {
-                   // Log4NetHelper.WarnFormat("对外请求操过500ms,请求时长:{0}ms,url:{1},请求参数:{2},requestHeaders:{3},返回结果:{4}",
-                    //    stopwatch.ElapsedMilliseconds, url, httpContentResult, JsonConvert.SerializeObject(requestHeaders), result);
-                }
                 return result;
             }
             catch (Exception ex)
             {
-                //Log4NetHelper.ErrorLog($"Post 请求出错,errormsg:{ex.Message},url:{url},httpContent:{httpContentResult},requestHeaders:{JsonConvert.SerializeObject(requestHeaders)}", ex);
-                throw;
+                throw ex;
             }
         }
 
@@ -114,8 +97,7 @@ namespace RecordOverTimeForm.Utils
             }
             catch (Exception ex)
             {
-                //Log4NetHelper.ErrorLog($"DownLoad 请求出错,errormsg:{ex.Message},url:{url}", ex);
-                throw;
+                throw ex;
             }
         }
 
@@ -152,21 +134,6 @@ namespace RecordOverTimeForm.Utils
                     httpRequestMessage.Headers.Add(item.Key, item.Value);
                 }
             }
-        }
-
-        private bool IgnoreLog(string url)
-        {
-            var makepaper = "/Api/IntelligentExamination/GetItem";
-            var replace = "/Api/IntelligentExamination/ReplaceItem";
-            var ignoreurl = new List<string>() { makepaper, replace };
-            foreach (var item in ignoreurl)
-            {
-                if (url.Contains(item))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 
