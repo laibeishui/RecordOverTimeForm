@@ -85,7 +85,6 @@
             this.tb40 = new System.Windows.Forms.TextBox();
             this.tb41 = new System.Windows.Forms.TextBox();
             this.tb35 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.unit = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -756,9 +755,9 @@
             // 
             // submitOverTime
             // 
-            this.submitOverTime.Location = new System.Drawing.Point(584, 85);
+            this.submitOverTime.Location = new System.Drawing.Point(584, 76);
             this.submitOverTime.Name = "submitOverTime";
-            this.submitOverTime.Size = new System.Drawing.Size(113, 29);
+            this.submitOverTime.Size = new System.Drawing.Size(113, 43);
             this.submitOverTime.TabIndex = 6;
             this.submitOverTime.Text = "确定保存加班时间";
             this.submitOverTime.UseVisualStyleBackColor = true;
@@ -912,15 +911,6 @@
             this.tb35.MouseEnter += new System.EventHandler(this.OnMouseEnter);
             this.tb35.MouseLeave += new System.EventHandler(this.OnMouseLeave);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(264, 623);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(449, 12);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "注：请不要删除电脑路径下 C:\\Users\\overtimeRecord  文件夹。数据保存在这里。";
-            // 
             // unit
             // 
             this.unit.AutoSize = true;
@@ -935,9 +925,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(750, 653);
+            this.ClientSize = new System.Drawing.Size(720, 625);
             this.Controls.Add(this.unit);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -1061,7 +1050,6 @@
         private System.Windows.Forms.TextBox tb40;
         private System.Windows.Forms.TextBox tb41;
         private System.Windows.Forms.TextBox tb35;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label unit;
     }
 }

@@ -12,7 +12,7 @@ namespace RecordOverTimeForm.Business
 {
     public static class FileOperations
     {
-        private static readonly string _baseFilePath = @"C:/Users/overtimeRecord/";
+        private static readonly string _baseFilePath = Environment.CurrentDirectory + "/overtimeRecord";
 
         /// <summary>
         /// 读取Ini  文件

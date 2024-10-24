@@ -15,43 +15,37 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0573AC2F5EC5444FA1CDFFA5D2F4765C"
+        "MsmKey" = "8:_0BD2DF3FBB9C4F72B4FBC94315321508"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0CD3B9AC347844BE8DD81453C553BE41"
+        "MsmKey" = "8:_1E468CDE516D4C109160C786D01D1387"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_128E0928799A4CB898A2E3DC23E9D43C"
+        "MsmKey" = "8:_26501730C4224C3EAD31D1C43F2E84D0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1509B617FB764683AEFA96DA5941488F"
+        "MsmKey" = "8:_46739A9723354574A37D67DC7BAF77B2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_28D04207C4284C29AFDD4E8F9F06F2F3"
+        "MsmKey" = "8:_518C75B07D2E49C1B7DA111D6A0582EB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5408311B7CFB4432B964CD1FFB6539B5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_77EA797D935741EDB8813445BD998764"
+        "MsmKey" = "8:_53410A88D03C4B7CA0E31230E5FE824D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,13 +57,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_797E8C16280840C115979DA4326D17AE"
-        "OwnerKey" = "8:_0CD3B9AC347844BE8DD81453C553BE41"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_85406FC982F542ED902F4F0E693D2CDB"
+        "MsmKey" = "8:_904B1A4724184617941D54B959D44C26"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,19 +69,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B0683D27D7213769317366AE78582286"
-        "OwnerKey" = "8:_0CD3B9AC347844BE8DD81453C553BE41"
+        "MsmKey" = "8:_9F70DBCF0A31498894FC8F85D4C1DF52"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B0683D27D7213769317366AE78582286"
-        "OwnerKey" = "8:_9139BB7D30864724A998C8CD953472DA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B1FC6EDEE96D4E989ADDDC9B4B54CAD5"
+        "MsmKey" = "8:_AFD02F23C40242068F81C01F56FEDCFC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -117,8 +99,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E776D13B44A285588D3C5332E67FDE93"
-        "OwnerKey" = "8:_0573AC2F5EC5444FA1CDFFA5D2F4765C"
+        "MsmKey" = "8:_D52F6E7CB3407D1EEA909764E9358D8E"
+        "OwnerKey" = "8:_9139BB7D30864724A998C8CD953472DA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D52F6E7CB3407D1EEA909764E9358D8E"
+        "OwnerKey" = "8:_9F70DBCF0A31498894FC8F85D4C1DF52"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D70838D6A96C49A8A56D97C27F19D32F"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -129,8 +123,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_ED8EEE3C06E54CBC968F9F36A4FE67FD"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_E776D13B44A285588D3C5332E67FDE93"
+        "OwnerKey" = "8:_AFD02F23C40242068F81C01F56FEDCFC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,7 +136,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9F70DBCF0A31498894FC8F85D4C1DF52"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_46739A9723354574A37D67DC7BAF77B2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AFD02F23C40242068F81C01F56FEDCFC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9139BB7D30864724A998C8CD953472DA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D52F6E7CB3407D1EEA909764E9358D8E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -155,30 +173,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_797E8C16280840C115979DA4326D17AE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0CD3B9AC347844BE8DD81453C553BE41"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B0683D27D7213769317366AE78582286"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5408311B7CFB4432B964CD1FFB6539B5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0573AC2F5EC5444FA1CDFFA5D2F4765C"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -199,6 +193,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -215,6 +217,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -244,69 +254,7 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0573AC2F5EC5444FA1CDFFA5D2F4765C"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.45.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_0573AC2F5EC5444FA1CDFFA5D2F4765C"
-                    {
-                    "Name" = "8:HtmlAgilityPack.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\HtmlAgilityPack.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0CD3B9AC347844BE8DD81453C553BE41"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:RecordOverTimeForm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_0CD3B9AC347844BE8DD81453C553BE41"
-                    {
-                    "Name" = "8:RecordOverTimeForm.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_128E0928799A4CB898A2E3DC23E9D43C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0BD2DF3FBB9C4F72B4FBC94315321508"
             {
             "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\Newtonsoft.Json.xml"
             "TargetName" = "8:Newtonsoft.Json.xml"
@@ -326,7 +274,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1509B617FB764683AEFA96DA5941488F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E468CDE516D4C109160C786D01D1387"
             {
             "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\HtmlAgilityPack.pdb"
             "TargetName" = "8:HtmlAgilityPack.pdb"
@@ -346,7 +294,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_28D04207C4284C29AFDD4E8F9F06F2F3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26501730C4224C3EAD31D1C43F2E84D0"
             {
             "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe.config"
             "TargetName" = "8:RecordOverTimeForm.exe.config"
@@ -366,14 +314,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5408311B7CFB4432B964CD1FFB6539B5"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_46739A9723354574A37D67DC7BAF77B2"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5408311B7CFB4432B964CD1FFB6539B5"
+                    "_46739A9723354574A37D67DC7BAF77B2"
                     {
                     "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
@@ -397,10 +345,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_77EA797D935741EDB8813445BD998764"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_518C75B07D2E49C1B7DA111D6A0582EB"
             {
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\HtmlAgilityPack.xml"
-            "TargetName" = "8:HtmlAgilityPack.xml"
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe.manifest"
+            "TargetName" = "8:RecordOverTimeForm.exe.manifest"
+            "Tag" = "8:"
+            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_53410A88D03C4B7CA0E31230E5FE824D"
+            {
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.application"
+            "TargetName" = "8:RecordOverTimeForm.application"
             "Tag" = "8:"
             "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
             "Condition" = "8:"
@@ -444,14 +412,14 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_85406FC982F542ED902F4F0E693D2CDB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_904B1A4724184617941D54B959D44C26"
             {
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.application"
-            "TargetName" = "8:RecordOverTimeForm.application"
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.pdb"
+            "TargetName" = "8:RecordOverTimeForm.pdb"
             "Tag" = "8:"
             "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
             "Condition" = "8:"
@@ -468,20 +436,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B0683D27D7213769317366AE78582286"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9F70DBCF0A31498894FC8F85D4C1DF52"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:RecordOverTimeForm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B0683D27D7213769317366AE78582286"
+                    "_9F70DBCF0A31498894FC8F85D4C1DF52"
                     {
-                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Name" = "8:RecordOverTimeForm.exe"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
@@ -496,13 +464,24 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B1FC6EDEE96D4E989ADDDC9B4B54CAD5"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AFD02F23C40242068F81C01F56FEDCFC"
             {
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe.manifest"
-            "TargetName" = "8:RecordOverTimeForm.exe.manifest"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.45.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_AFD02F23C40242068F81C01F56FEDCFC"
+                    {
+                    "Name" = "8:HtmlAgilityPack.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\HtmlAgilityPack.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
             "Condition" = "8:"
@@ -546,7 +525,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -590,6 +569,57 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D52F6E7CB3407D1EEA909764E9358D8E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D52F6E7CB3407D1EEA909764E9358D8E"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D70838D6A96C49A8A56D97C27F19D32F"
+            {
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\HtmlAgilityPack.xml"
+            "TargetName" = "8:HtmlAgilityPack.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E776D13B44A285588D3C5332E67FDE93"
             {
             "AssemblyRegister" = "3:1"
@@ -617,28 +647,8 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED8EEE3C06E54CBC968F9F36A4FE67FD"
-            {
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.pdb"
-            "TargetName" = "8:RecordOverTimeForm.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
