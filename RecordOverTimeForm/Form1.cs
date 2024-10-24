@@ -33,7 +33,8 @@ namespace RecordOverTimeForm
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            ShowDates(DateTime.Now);
+            //ShowDates(DateTime.Now);
+            addOverTimeTimepicker.Value = DateTime.Now;
             LabelShowTime();
         }
 
