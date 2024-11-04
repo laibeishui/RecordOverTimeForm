@@ -27,7 +27,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_26501730C4224C3EAD31D1C43F2E84D0"
+        "MsmKey" = "8:_38F9B6BF671D4B468DFF884B5E2A0A2A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D3A1CA67EE2407382F41332456A12D0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,25 +45,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_518C75B07D2E49C1B7DA111D6A0582EB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53410A88D03C4B7CA0E31230E5FE824D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_797E8C16280840C115979DA4326D17AE"
         "OwnerKey" = "8:_9139BB7D30864724A998C8CD953472DA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_904B1A4724184617941D54B959D44C26"
+        "MsmKey" = "8:_797E8C16280840C115979DA4326D17AE"
+        "OwnerKey" = "8:_84A42D5B0851421DA656014F5DF31F04"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_84A42D5B0851421DA656014F5DF31F04"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -69,13 +69,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9F70DBCF0A31498894FC8F85D4C1DF52"
+        "MsmKey" = "8:_AFD02F23C40242068F81C01F56FEDCFC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_AFD02F23C40242068F81C01F56FEDCFC"
+        "MsmKey" = "8:_B2350B1F09D9426C902B59C6E1A791D7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -106,7 +106,7 @@
         "Entry"
         {
         "MsmKey" = "8:_D52F6E7CB3407D1EEA909764E9358D8E"
-        "OwnerKey" = "8:_9F70DBCF0A31498894FC8F85D4C1DF52"
+        "OwnerKey" = "8:_84A42D5B0851421DA656014F5DF31F04"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -129,6 +129,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F477F7DEE79843FCA29A4C90DBF008BD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_E776D13B44A285588D3C5332E67FDE93"
         "MsmSig" = "8:_UNDEFINED"
@@ -136,7 +142,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9F70DBCF0A31498894FC8F85D4C1DF52"
+        "OwnerKey" = "8:_84A42D5B0851421DA656014F5DF31F04"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -200,6 +206,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -294,10 +308,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26501730C4224C3EAD31D1C43F2E84D0"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_38F9B6BF671D4B468DFF884B5E2A0A2A"
             {
             "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe.config"
             "TargetName" = "8:RecordOverTimeForm.exe.config"
+            "Tag" = "8:"
+            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D3A1CA67EE2407382F41332456A12D0"
+            {
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe.manifest"
+            "TargetName" = "8:RecordOverTimeForm.exe.manifest"
             "Tag" = "8:"
             "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
             "Condition" = "8:"
@@ -345,46 +379,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_518C75B07D2E49C1B7DA111D6A0582EB"
-            {
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.exe.manifest"
-            "TargetName" = "8:RecordOverTimeForm.exe.manifest"
-            "Tag" = "8:"
-            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_53410A88D03C4B7CA0E31230E5FE824D"
-            {
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.application"
-            "TargetName" = "8:RecordOverTimeForm.application"
-            "Tag" = "8:"
-            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_797E8C16280840C115979DA4326D17AE"
             {
             "AssemblyRegister" = "3:1"
@@ -416,34 +410,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_904B1A4724184617941D54B959D44C26"
-            {
-            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.pdb"
-            "TargetName" = "8:RecordOverTimeForm.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9F70DBCF0A31498894FC8F85D4C1DF52"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_84A42D5B0851421DA656014F5DF31F04"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:RecordOverTimeForm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9F70DBCF0A31498894FC8F85D4C1DF52"
+                    "_84A42D5B0851421DA656014F5DF31F04"
                     {
                     "Name" = "8:RecordOverTimeForm.exe"
                     "Attributes" = "3:512"
@@ -482,6 +456,26 @@
                 }
             "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\HtmlAgilityPack.dll"
             "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B2350B1F09D9426C902B59C6E1A791D7"
+            {
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.pdb"
+            "TargetName" = "8:RecordOverTimeForm.pdb"
             "Tag" = "8:"
             "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
             "Condition" = "8:"
@@ -651,6 +645,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F477F7DEE79843FCA29A4C90DBF008BD"
+            {
+            "SourcePath" = "8:..\\RecordOverTimeForm\\bin\\Debug\\RecordOverTimeForm.application"
+            "TargetName" = "8:RecordOverTimeForm.application"
+            "Tag" = "8:"
+            "Folder" = "8:_FFC91DEED28E4A139829D3F860F76FB0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -719,7 +733,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{ACCFA66D-C353-456C-9025-DE2A95F8ADE4}"
-        "PackageCode" = "8:{7B4EDE86-9110-4D70-B7A3-525C868BAA98}"
+        "PackageCode" = "8:{1DBEDE0F-9A1B-4E65-8D60-26035969ADB2}"
         "UpgradeCode" = "8:{29CAA62F-F703-4E0A-B18E-87AE31AD8752}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

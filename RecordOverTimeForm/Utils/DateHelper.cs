@@ -52,30 +52,16 @@ namespace RecordOverTimeForm.Utils
         /// <returns></returns>
         public static int CountOfWeekNumberInMonth(int monthCount, DateTime firstdayinMonth, List<HolidayDto> holidays)
         {
-            int i = 0;
             int weekCount = 0;
-            int flagMonth = firstdayinMonth.Month;
-            while (i < monthCount)
+
+            for (int day = 0; day < monthCount; day++)
             {
-                int k = i;
-                if (firstdayinMonth.AddDays(k).DayOfWeek == DayOfWeek.Saturday
-                    && k + 1 < monthCount)
-                {
-                    weekCount += 2;
-                    i += 6;
-                }
-                else if (firstdayinMonth.AddDays(k).DayOfWeek == DayOfWeek.Sunday)
+                DateTime currentDate = firstdayinMonth.AddDays(day);
+                if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
                 {
                     weekCount++;
-                    i += 6;
-                }
-                else
-                {
-                    i++;
                 }
             }
-
-            
 
             return weekCount;
         }
