@@ -115,5 +115,26 @@ namespace RecordOverTimeForm.Business
                 holidays = JsonConvert.DeserializeObject<List<HolidayDto>>(readJson);
             return holidays;
         }
+
+        public static double ReadInputOvertimeHours()
+        {
+            var fileName = "inputOvertimeHours.txt";
+            string filePath = _baseFilePath + "\\" + fileName;
+            if (string.IsNullOrEmpty(filePath)) return 0;
+            var year = DateTime.Now.Year;
+            var month = DateTime.Now.Month;
+            return Convert.ToDouble(IniHelper.Read(year.ToString(), month.ToString(), null, filePath));
+        }
+
+        public static bool WriteInputOverTimeHours(double overtime)
+        {
+            var year = DateTime.Now.Year;
+            var month = DateTime.Now.Month;
+            var fileName = "inputOvertimeHours.txt";
+            string filePath = _baseFilePath + "\\" + fileName;
+            FileHelper.CreateDirectory(_baseFilePath);
+            FileHelper.CrateFile(filePath);
+            return IniHelper.Write(year.ToString(), month.ToString(), overtime.ToString(), filePath) != 0;
+        }
     }
 }

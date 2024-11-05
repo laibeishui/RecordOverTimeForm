@@ -161,12 +161,37 @@ namespace RecordOverTimeForm
         /// </summary>
         private void LabelShowTime()
         {
+            double inputHours = 0;
+            if (string.IsNullOrEmpty(overTimeHoursInput.Text))
+            {
+                inputHours = FileOperations.ReadInputOvertimeHours();
+                overTimeHoursInput.Text = inputHours==0?"":inputHours.ToString();
+            }
+            else
+            {
+                inputHours = Convert.ToDouble(overTimeHoursInput.Text);
+            }
             var freeDayCount = calculate.GetFreeDayCount();
             var workDayCount = calculate._monthCount - freeDayCount;
-            var needOvertimeHours = workDayCount * 0.5 + 20;
+            var supplytimeHours = workDayCount * 0.5;
+            var needOvertimeHours = supplytimeHours + inputHours;
             var haveOvertimeHours = calculate.CalculateHadOverTime();
-            label4.Text = $"这个月总共有 {workDayCount} 个工作日，这个月你需要加班的时长为 {needOvertimeHours} 个小时";
-            overtime.Text = $"这个月你一共加了{haveOvertimeHours}小时的班，还需要加{needOvertimeHours - haveOvertimeHours}个小时";
+            label4.Text = $"这个月总共有 {workDayCount} 个工作日，这个月你需要加班{supplytimeHours}个补时 + ";
+            sumHoursLabel.Text = $"小时 = {supplytimeHours + inputHours}  个小时";
+            var surplusOvertime = needOvertimeHours - haveOvertimeHours;
+            if (surplusOvertime > 0)
+            {
+                overtime.Text = $"这个月你一共加了{haveOvertimeHours}小时的班，还需要加{needOvertimeHours - haveOvertimeHours}个小时";
+            }
+            else if (surplusOvertime == 0)
+            {
+                overtime.Text = $"这个月你一共加了{haveOvertimeHours}小时的班，恭喜你已经加满啦！！！";
+            }
+            else
+            {
+                overtime.Text = $"这个月你一共加了{haveOvertimeHours}小时的班，你被公司白嫖了{Math.Abs(surplusOvertime)}个小时 ！！！";
+            }
+            
         }
 
         /// <summary>
@@ -280,5 +305,30 @@ namespace RecordOverTimeForm
             }
         }
 
+        private void overTimeHoursInput_TextChanged(object sender, EventArgs e)
+        {
+            var hours = string.IsNullOrEmpty(overTimeHoursInput.Text)? 0: Convert.ToDouble(overTimeHoursInput.Text);
+            if (hours>50)
+            {
+                DialogResult dialogResult = Popup.Tips("根据公司规定，最高只能加班 50 小时");
+                if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
+                {
+                    overTimeHoursInput.Text = "";
+                    return;
+                }
+            }
+
+            FileOperations.WriteInputOverTimeHours(hours);
+            LabelShowTime();
+            //else if (overTimeHovers > 7.5)
+            //{
+            //    DialogResult dialogResult = Popup.Tips(FreeDayError);
+            //    if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
+            //    {
+            //        over.Text = "";
+            //        return;
+            //    }
+            //}
+        }
     }
 }

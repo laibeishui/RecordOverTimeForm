@@ -86,6 +86,8 @@
             this.tb41 = new System.Windows.Forms.TextBox();
             this.tb35 = new System.Windows.Forms.TextBox();
             this.unit = new System.Windows.Forms.Label();
+            this.overTimeHoursInput = new System.Windows.Forms.TextBox();
+            this.sumHoursLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // overtime
@@ -795,9 +797,9 @@
             this.label4.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(33, 18);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(543, 16);
+            this.label4.Size = new System.Drawing.Size(439, 16);
             this.label4.TabIndex = 11;
-            this.label4.Text = "这个月总共有xxxx 个工作日，所以你需要加班的时长为 xxx补时+20=51小时";
+            this.label4.Text = "这个月总共有xx 个工作日，这个月你需要加班10.5个补时 + ";
             // 
             // tb36
             // 
@@ -920,12 +922,34 @@
             this.unit.TabIndex = 13;
             this.unit.Text = "单位(小时)";
             // 
+            // overTimeHoursInput
+            // 
+            this.overTimeHoursInput.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.overTimeHoursInput.Location = new System.Drawing.Point(478, 14);
+            this.overTimeHoursInput.Name = "overTimeHoursInput";
+            this.overTimeHoursInput.Size = new System.Drawing.Size(35, 26);
+            this.overTimeHoursInput.TabIndex = 14;
+            this.overTimeHoursInput.TextChanged += new System.EventHandler(this.overTimeHoursInput_TextChanged);
+            this.overTimeHoursInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.overTimeInput_KeyPress);
+            // 
+            // sumHoursLabel
+            // 
+            this.sumHoursLabel.AutoSize = true;
+            this.sumHoursLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sumHoursLabel.Location = new System.Drawing.Point(519, 18);
+            this.sumHoursLabel.Name = "sumHoursLabel";
+            this.sumHoursLabel.Size = new System.Drawing.Size(143, 16);
+            this.sumHoursLabel.TabIndex = 15;
+            this.sumHoursLabel.Text = "小时 = xx  个小时";
+            // 
             // 计算加班时间
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(720, 625);
+            this.Controls.Add(this.sumHoursLabel);
+            this.Controls.Add(this.overTimeHoursInput);
             this.Controls.Add(this.unit);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -1051,6 +1075,8 @@
         private System.Windows.Forms.TextBox tb41;
         private System.Windows.Forms.TextBox tb35;
         private System.Windows.Forms.Label unit;
+        private System.Windows.Forms.TextBox overTimeHoursInput;
+        private System.Windows.Forms.Label sumHoursLabel;
     }
 }
 
