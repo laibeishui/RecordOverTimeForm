@@ -1,25 +1,23 @@
 ﻿using RecordOverTimeForm.Business;
 using RecordOverTimeForm.Common;
+using RecordOverTimeForm.Controls;
 using RecordOverTimeForm.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace RecordOverTimeForm
 {
     public partial class 计算加班时间 : Form
     {
-        public static List<HolidayDto> holidays = HolidayNotice.GetHolidayList();
-
-        public Calculate calculate = new Calculate(holidays);
-
-        public static string WorkDayError = "工作日加班时长不超过3.5小时！ ";
-
-        public static string FreeDayError = "休息日加班时长不超过7.5小时！ ";
-
+        public static List<HolidayDto> _holidays = HolidayNotice.GetHolidayList(DateTime.Now.Year);
+        public Calculate _calculate = new Calculate(_holidays);
         private bool isClicked = false;
+        private Color _panelHoverBorderColor;
+        private Color _panelHoverBackColor;
 
         public 计算加班时间()
         {
@@ -34,105 +32,15 @@ namespace RecordOverTimeForm
         private void Form1_Load(object sender, EventArgs e)
         {
             //ShowDates(DateTime.Now);
-            addOverTimeTimepicker.Value = DateTime.Now;
-            LabelShowTime();
-        }
+            //addOverTimeTimepicker.Value = DateTime.Now;
+            //LabelShowTime();
+            //datePicker1.Value = DateTime.Now;
+            //startTimePicker.
+            var now = DateTime.Now;
+            yearSelect.SelectedValue = now.Year;
+            monthSelect.SelectedValue = now.Month;
 
-        /// <summary>
-        /// 点击输入加班时长，限制只能输入数字和小数点，并且小数点不能作为开头，不能存在两个小数点 
-        /// （时长：周六周日不能超过7.5 ，周一到周五不能超过3.5）
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void overTimeInput_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (((int)e.KeyChar < 48 || (int)e.KeyChar > 57) && (int)e.KeyChar != 8 && (int)e.KeyChar != 46)
-                e.Handled = true;
-            //小数点的处理。
-            if ((int)e.KeyChar == 46) //小数点                          
-            {
-                if (overTimeInput.Text.Length <= 0)
-                    e.Handled = true;   //小数点不能在第一位
-                else
-                {
-                    float f;
-                    float oldf;
-                    bool b1 = false, b2 = false;
-                    b1 = float.TryParse(overTimeInput.Text, out oldf);
-                    b2 = float.TryParse(overTimeInput.Text + e.KeyChar.ToString(), out f);
-                    if (b2 == false)
-                    {
-                        if (b1 == true)
-                            e.Handled = true;
-                        else
-                            e.Handled = false;
-                    }
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// 展示某月和当月加班时间
-        /// </summary>
-        private void ShowDates(DateTime date)
-        {
-            DateTime nowDate = DateTime.Now;
-            TextBoxInit();
-            var firstDayOfMonth = date.AddDays(1 - date.Day);
-            var year = date.Year;
-            var month = date.Month;
-            bool isSameMonth = nowDate.Year == year && nowDate.Month == month ? true : false;
-            var monthCount = DateTime.DaysInMonth(year, month);
-            int dayofweek = Convert.ToInt32(firstDayOfMonth.DayOfWeek);
-            // dayOfWeek 周日获取出来是 0  ,需要修改成 7
-            if (dayofweek == 0) dayofweek = 7;
-            int controlnum = dayofweek;
-            var readDic = FileOperations.ReadIniFile(date);
-            var readDicKeyList = readDic?.Keys.ToList();
-            for (var i = 1; i <= monthCount; i++)
-            {
-                var day = firstDayOfMonth.AddDays(i - 1);
-                var dayType = HolidayNotice.GetDayType(day, holidays);
-
-                var cc = new ChineseCalendar(day);
-                var coltb = this.Controls.Find("tb" + controlnum, false);
-                if (dayType == dayType.假期)
-                {
-                    coltb[0].BackColor = Color.LightGreen;
-                    coltb[0].ForeColor = Color.Black;
-                }
-                else if (dayType == dayType.周末)
-                {
-                    coltb[0].BackColor = Color.SkyBlue;
-                    coltb[0].ForeColor = Color.Black;
-                }
-                else if (dayType == dayType.工作)
-                {
-                    coltb[0].BackColor = Color.LightPink;
-                    coltb[0].ForeColor = Color.Black;
-                }
-                else if (dayType == dayType.调休)
-                {
-                    coltb[0].BackColor = Color.OrangeRed;
-                    coltb[0].ForeColor = Color.White;
-                }
-                var calendarCellText = "\r\n农历：" + cc.ChineseMonthData + "\r\n" + dayType.ToString() + "\r\n" + GetHolidayStr(cc);
-                if (readDicKeyList != null && readDicKeyList.Count != 0 && readDicKeyList.Contains(i) && readDic[i] != 0)
-                {
-                    coltb[0].Text = i.ToString() + "  " + readDic[i].ToString() + "小时" + calendarCellText;
-                    coltb[0].BackColor = Color.Yellow;
-                    coltb[0].ForeColor = Color.Black;
-                }
-                else
-                {
-                    coltb[0].Text = i.ToString() + calendarCellText;
-                }
-                coltb[0].Visible = true;
-                if (isSameMonth && nowDate.Day == i)
-                    coltb[0].BackColor = Color.Cornsilk;
-                controlnum++;
-            }
+            DatesInit(DateTime.Now);
         }
 
         /// <summary>
@@ -161,174 +69,280 @@ namespace RecordOverTimeForm
         /// </summary>
         private void LabelShowTime()
         {
-            double inputHours = 0;
-            if (string.IsNullOrEmpty(overTimeHoursInput.Text))
-            {
-                inputHours = FileOperations.ReadInputOvertimeHours();
-                overTimeHoursInput.Text = inputHours==0?"":inputHours.ToString();
-            }
-            else
-            {
-                inputHours = Convert.ToDouble(overTimeHoursInput.Text);
-            }
-            var freeDayCount = calculate.GetFreeDayCount();
-            var workDayCount = calculate._monthCount - freeDayCount;
+            var inputHours = FileOperations.ReadInputOvertimeHours();
+            overtimeInput.Value = inputHours;
+            var freeDayCount = _calculate.GetFreeDayCount();
+            var workDayCount = _calculate._monthCount - freeDayCount;
             var supplytimeHours = workDayCount * 0.5;
-            var needOvertimeHours = supplytimeHours + inputHours;
-            var haveOvertimeHours = calculate.CalculateHadOverTime();
-            label4.Text = $"这个月总共有 {workDayCount} 个工作日，这个月你需要加班{supplytimeHours}个补时 + ";
-            sumHoursLabel.Text = $"小时 = {supplytimeHours + inputHours}  个小时";
+            var needOvertimeHours = supplytimeHours + Convert.ToDouble(inputHours);
+            var haveOvertimeHours = _calculate.CalculateHadOverTime();
+            needOvertimeLabel.Text = $"本月共{workDayCount} 个工作日，需要加{supplytimeHours}个补时 +";
+            sumHoursLabel.Text = $"小时 = {supplytimeHours + Convert.ToDouble(inputHours)}个小时";
             var surplusOvertime = needOvertimeHours - haveOvertimeHours;
             if (surplusOvertime > 0)
             {
-                overtime.Text = $"这个月你一共加了{haveOvertimeHours}小时的班，还需要加{needOvertimeHours - haveOvertimeHours}个小时";
+                overtime.Text = $"本月目前已加{haveOvertimeHours}小时，还需要加{needOvertimeHours - haveOvertimeHours}个小时";
             }
             else if (surplusOvertime == 0)
             {
-                overtime.Text = $"这个月你一共加了{haveOvertimeHours}小时的班，恭喜你已经加满啦！！！";
+                overtime.Text = $"本月目前已加{haveOvertimeHours}小时，恭喜你已经加满啦！！！";
             }
             else
             {
-                overtime.Text = $"这个月你一共加了{haveOvertimeHours}小时的班，你被公司白嫖了{Math.Abs(surplusOvertime)}个小时 ！！！";
-            }
-            
-        }
-
-        /// <summary>
-        /// 初始化日期列表
-        /// </summary>
-        private void TextBoxInit()
-        {
-            for (var i = 1; i <= 42; i++)
-            {
-                var coltb = this.Controls.Find("tb" + i.ToString(), false);
-                coltb[0].Text = "";
-                coltb[0].BackColor = Color.White;
-                coltb[0].Visible = false;
+                overtime.Text = $"本月目前已加{haveOvertimeHours}小时，你被公司白嫖了{Math.Abs(surplusOvertime)}个小时 ！！！";
             }
         }
 
-        private void submitOverTime_Click(object sender, EventArgs e)
+
+        public void DatesInit(DateTime date)
         {
-            if (string.IsNullOrEmpty(overTimeInput.Text)) return;
-            var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
-            var dayType = HolidayNotice.GetDayType(date, holidays);
-            var overTimeHovers = Convert.ToDouble(overTimeInput.Text);
+            DateTime nowDate = DateTime.Now;
+            DatePanelBoxInit();
+            LabelShowTime();
+            var firstDayOfMonth = date.AddDays(1 - date.Day);
+            var year = date.Year;
+            var month = date.Month;
+            bool isSameMonth = nowDate.Year == year && nowDate.Month == month ? true : false;
+            var monthCount = DateTime.DaysInMonth(year, month);
+            int dayofweek = Convert.ToInt32(firstDayOfMonth.DayOfWeek);
+            // dayOfWeek 周日获取出来是 0  ,需要修改成 7
+            if (dayofweek == 0) dayofweek = 7;
+            int controlnum = dayofweek;
+            var readDic = FileOperations.ReadIniFile(date);
+            var readDicKeyList = readDic?.Keys.ToList();
+            List<AntdUI.Panel> datePanels = GetDatePanels();
+            var holidays = HolidayNotice.GetHolidayList(date.Year);
+            for (var i = 1; i <= monthCount; i++)
+            {
+                var overtime = "";
+                if (readDicKeyList != null && readDicKeyList.Count != 0 && readDicKeyList.Contains(i) && readDic[i] >= 0)
+                {
+                    overtime = readDic[i].ToString("F1");
+                }
+                var day = firstDayOfMonth.AddDays(i - 1);
+                var datePanel = datePanels[controlnum - 1];
+                PanelStyle(datePanel, day, i,holidays, overtime);
 
-            if ((dayType == dayType.工作 || dayType == dayType.调休) && overTimeHovers > 3.5)
-            {
-                DialogResult dialogResult = Popup.Tips(WorkDayError);
-                if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
+                datePanel.Visible = true;
+                if (isSameMonth && nowDate.Day == i)
                 {
-                    overTimeInput.Text = "";
-                    return;
+                    datePanel.Badge = "今";
+                    datePanel.BadgeBack = System.Drawing.Color.Blue;
+                    datePanel.BadgeOffsetX = -1;
+                    datePanel.BadgeOffsetY = -1;
+                    datePanel.BadgeSize = 1F;
                 }
-            }
-            else if (overTimeHovers > 7.5)
-            {
-                DialogResult dialogResult = Popup.Tips(FreeDayError);
-                if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
-                {
-                    overTimeInput.Text = "";
-                    return;
-                }
-            }
-
-            bool hasWrite = FileOperations.WriteIniFile(date, overTimeHovers);
-            if (hasWrite)
-            {
-                DialogResult dialogResult = Popup.Tips("保存成功");
-                if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
-                {
-                    ShowDates(DateTime.Now);
-                    LabelShowTime();
-                }
-            }
-            else
-            {
-                DialogResult dialogResult = Popup.Tips("保存失败，请尝试重新提交");
-                if (dialogResult.Equals(DialogResult.Yes)) { }
+                controlnum++;
             }
         }
 
-        private void DateBtnClick(object sender, EventArgs e)
+        private void PanelStyle(AntdUI.Panel panel, DateTime day, int dayindex, List<HolidayDto> holidays, string overtime = "")
         {
-            base.OnClick(e);
-            TextBox clickedTextBox = sender as TextBox;
-            var tempText = clickedTextBox.Text;
-            string[] lines = tempText.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            string[] parts = lines[0].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            var monthDate = addOverTimeTimepicker.Value;
-            addOverTimeTimepicker.Value = new DateTime(monthDate.Year, monthDate.Month, Convert.ToInt32(parts[0]));
-            isClicked = true;
+            var dayType = HolidayNotice.GetDayType(day, holidays);
+            var cc = new ChineseCalendar(day);
+            var holidayName = GetHolidayStr(cc);
+            var labels = GetLabelsInPanel(panel);
+            foreach (var label in labels)
+            {
+                if (label.Name.Contains("dateLabel"))
+                {
+                    label.Text = dayindex.ToString("D2");
+                }
+                else if (label.Name.Contains("overtimeLabel"))
+                {
+                    label.Text = overtime;
+                }
+                else if (label.Name.Contains("holidayLabel"))
+                {
+                    label.Text = holidayName;
+                }
+                else
+                {
+                    label.Text = cc.ChineseMonthData;
+                }
+            }
+
+            if (dayType == DayType.假期)
+            {
+                panel.BorderColor = Color.Green;
+                panel.Badge = "休";
+                panel.BadgeBack = System.Drawing.Color.Green;
+                panel.BadgeOffsetX = -1;
+                panel.BadgeOffsetY = -1;
+                panel.BadgeSize = 1F;
+                panel.BorderColor = Color.Green;
+            }
+            else if (dayType == DayType.周末)
+            {
+                panel.BorderColor = Color.Green;
+            }
+            else if (dayType == DayType.工作)
+            {
+                panel.BorderColor = Color.LightGray;
+            }
+            else if (dayType == DayType.调休)
+            {
+                panel.Badge = "班";
+                panel.BadgeBack = System.Drawing.Color.Red;
+                panel.BadgeOffsetX = -1;
+                panel.BadgeOffsetY = -1;
+                panel.BadgeSize = 1F;
+                panel.BorderColor = Color.LightGray;
+            }
+
+            if (overtime != "" && overtime != "0")
+            {
+                panel.BackColor = Color.Yellow;
+                panel.Back = Color.Yellow;
+                foreach (Control control in panel.Controls)
+                {
+                    control.BackColor = Color.Yellow;
+                }
+            }
+        }
+
+        private void DatePanelBoxInit()
+        {
+            List<AntdUI.Panel> foundPanels = GetDatePanels();
+            foreach (var panel in foundPanels)
+            {
+                var labels = GetLabelsInPanel(panel);
+                foreach (var label in labels)
+                {
+                    label.Text = "";
+                    label.Enabled = false;
+                }
+                panel.Badge = null;
+                panel.BackColor = Color.White;
+                panel.Back = Color.White;
+                foreach (Control control in panel.Controls)
+                {
+                    control.BackColor = Color.White;
+                }
+                panel.Visible = false;
+            }
+        }
+
+        // 获取 Panel 下的所有 Label 控件
+        private List<AntdUI.Label> GetLabelsInPanel(AntdUI.Panel panel)
+        {
+            List<AntdUI.Label> labels = new List<AntdUI.Label>();
+
+            foreach (Control control in panel.Controls)
+            {
+                if (control is AntdUI.Label)
+                {
+                    labels.Add((AntdUI.Label)control);
+                }
+            }
+
+            return labels;
+        }
+
+        // 查找一个 Panel 上的所有直接子 Panel 控件（不递归）
+        private List<AntdUI.Panel> GetDatePanels()
+        {
+            var backgroundPanel = FindPanelByName("backgroundpanel");
+
+            List<AntdUI.Panel> panels = new List<AntdUI.Panel>();
+
+            // 遍历 parentPanel 的所有直接子控件
+            foreach (Control control in backgroundPanel.Controls)
+            {
+                if (control is AntdUI.Panel)
+                {
+                    panels.Add((AntdUI.Panel)control);  // 如果是 Panel 控件，添加到结果列表
+                }
+            }
+
+            return panels.OrderBy(p => ExtractNumberFromName(p.Name)).ToList();
+        }
+
+        // 提取 Name 中的数字部分
+        private int ExtractNumberFromName(string name)
+        {
+            // 使用正则表达式提取 Name 中的数字部分
+            var match = Regex.Match(name, @"\d+");
+            return match.Success ? int.Parse(match.Value) : 0;
+        }
+
+        // 通过 Name 查找指定的 Panel 控件
+        private AntdUI.Panel FindPanelByName(string panelName)
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is AntdUI.Panel && control.Name == panelName)
+                {
+                    return (AntdUI.Panel)control;
+                }
+            }
+            return null; // 如果没有找到，返回 null
         }
 
         private void OnMouseEnter(object sender, EventArgs e)
         {
             base.OnMouseEnter(e);
-            if (!isClicked) // 只有在未被点击时才执行放大
+            if (!isClicked)
             {
-                TextBox textBox = sender as TextBox;
-                Size originalSize = textBox.Size;
-                textBox.Size = new Size(originalSize.Width + 10, originalSize.Height + 10); // 放大
-                textBox.Location = new Point(textBox.Location.X - 5, textBox.Location.Y - 5); // 调整位置
+                AntdUI.Panel panel = sender as AntdUI.Panel;
+                _panelHoverBorderColor = (Color)panel.BorderColor;
+                _panelHoverBackColor = (Color)panel.BackColor;
+                foreach (Control control in panel.Controls)
+                {
+                    control.BackColor = Color.FromArgb(210, 210, 210);
+                }
+
+                panel.BackColor = Color.FromArgb(210, 210, 210);
+                panel.Back = Color.FromArgb(210, 210, 210);
+                panel.BorderColor = Color.DarkBlue;
             }
         }
 
         private void OnMouseLeave(object sender, EventArgs e)
         {
             base.OnMouseLeave(e);
-            TextBox textBox = sender as TextBox;
-            Size originalSize = textBox.Size; // 恢复原始大小
-            textBox.Size = new Size(originalSize.Width - 10, originalSize.Height - 10); // 恢复位置
-            textBox.Location = new Point(textBox.Location.X + 5, textBox.Location.Y + 5); // 恢复位置
+            AntdUI.Panel panel = sender as AntdUI.Panel;
+            panel.BackColor = _panelHoverBackColor;
+            foreach (Control control in panel.Controls)
+            {
+                control.BackColor = _panelHoverBackColor;
+            }
+            panel.Back = _panelHoverBackColor;
+            panel.BorderColor = _panelHoverBorderColor;
             isClicked = false;
         }
 
-        private void addOverTimeTimepicker_ValueChanged(object sender, EventArgs e)
+        private void DatePanel_Click(object sender, EventArgs e)
         {
-            var date = Convert.ToDateTime(addOverTimeTimepicker.Text);
-            ShowDates(date);
-            // 遍历所有 TextBox 控件
-            foreach (TextBox textBox in this.Controls.OfType<TextBox>())
-            {
-                if (string.IsNullOrEmpty(textBox.Text) || textBox.Text.StartsWith("星期") || textBox.Name == "overTimeInput")
-                    continue;
-                var tempText = textBox.Text;
-                string[] lines = tempText.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                string[] parts = lines[0].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                if (Convert.ToInt32(parts[0]) == date.Day)
-                {
-                    overTimeInput.Text = parts.Count() > 1 ? parts[1].Replace("小时", "").Trim() : "";
-                    break;
-                }
-            }
+            var monthValue = Convert.ToInt32(monthSelect.SelectedValue);
+            var yearValue = Convert.ToInt32(yearSelect.SelectedValue);
+            base.OnClick(e);
+            AntdUI.Panel panel = sender as AntdUI.Panel;
+            var labels = GetLabelsInPanel(panel);
+            var dateLabel = labels.Where(x => x.Name.Contains("dateLabel")).FirstOrDefault();
+            var date = new DateTime(yearValue, monthValue, Convert.ToInt32(dateLabel.Text));
+            new Drawer(this, date).DatePanel_Click(sender, e);
         }
 
-        private void overTimeHoursInput_TextChanged(object sender, EventArgs e)
+        private void yearOrmonth_SelectedValueChanged(object sender, AntdUI.ObjectNEventArgs e)
         {
-            var hours = string.IsNullOrEmpty(overTimeHoursInput.Text)? 0: Convert.ToDouble(overTimeHoursInput.Text);
-            if (hours>50)
+            var monthValue = Convert.ToInt32(monthSelect.SelectedValue ?? "1");
+            var yearValue = Convert.ToInt32(yearSelect.SelectedValue);
+            var date = new DateTime(yearValue, monthValue, 1);
+            DatesInit(date);
+        }
+
+        private void overtimeInput_ValueChanged(object sender, AntdUI.DecimalEventArgs e)
+        {
+            var overtimeHour = overtimeInput.Value;
+            if (overtimeHour > 0)
             {
-                DialogResult dialogResult = Popup.Tips("根据公司规定，最高只能加班 50 小时");
-                if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
+                var isWrite = FileOperations.WriteInputOverTimeHours(overtimeHour);
+                if (isWrite)
                 {
-                    overTimeHoursInput.Text = "";
-                    return;
+                    LabelShowTime();
                 }
             }
-
-            FileOperations.WriteInputOverTimeHours(hours);
-            LabelShowTime();
-            //else if (overTimeHovers > 7.5)
-            //{
-            //    DialogResult dialogResult = Popup.Tips(FreeDayError);
-            //    if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.No))
-            //    {
-            //        over.Text = "";
-            //        return;
-            //    }
-            //}
         }
     }
 }

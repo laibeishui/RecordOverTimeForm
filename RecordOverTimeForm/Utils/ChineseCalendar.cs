@@ -1,15 +1,4 @@
-﻿using RecordOverTimeForm.Business;
-using RecordOverTimeForm.Common;
-using RecordOverTimeForm.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System;
 
 namespace RecordOverTimeForm
 {
@@ -134,16 +123,16 @@ namespace RecordOverTimeForm
             new SolarHolidayStruct(3, 12, 0, "植树节"),
             new SolarHolidayStruct(4, 1, 0, "愚人节"),
             new SolarHolidayStruct(5, 1, 1, "劳动节"),
-            new SolarHolidayStruct(5, 2, 1, "劳动节假日"),
-            new SolarHolidayStruct(5, 3, 1, "劳动节假日"),
-            new SolarHolidayStruct(6, 1, 0, "国际儿童节"),
+            new SolarHolidayStruct(5, 2, 1, "劳动节"),
+            new SolarHolidayStruct(5, 3, 1, "劳动节"),
+            new SolarHolidayStruct(6, 1, 0, "儿童节"),
             new SolarHolidayStruct(7, 1, 0, "建党节"),
             new SolarHolidayStruct(8, 1, 0, "建军节"),
             new SolarHolidayStruct(8, 8, 0, "父亲节"),
             new SolarHolidayStruct(9, 10, 0, "教师节"),
             new SolarHolidayStruct(10, 1, 1, "国庆节"),
-            new SolarHolidayStruct(10, 2, 1, "国庆节假日"),
-            new SolarHolidayStruct(10, 3, 1, "国庆节假日"),
+            new SolarHolidayStruct(10, 2, 1, "国庆节"),
+            new SolarHolidayStruct(10, 3, 1, "国庆节"),
             new SolarHolidayStruct(12, 24, 0, "平安夜"),
             new SolarHolidayStruct(12, 25, 0, "圣诞节"),
            };
@@ -156,12 +145,12 @@ namespace RecordOverTimeForm
             new LunarHolidayStruct(1, 1, 1, "春节"),
             new LunarHolidayStruct(1, 15, 0, "元宵节"),
             new LunarHolidayStruct(5, 5, 0, "端午节"),
-            new LunarHolidayStruct(7, 7, 0, "七夕情人节"),
+            new LunarHolidayStruct(7, 7, 0, "七夕节"),
             new LunarHolidayStruct(8, 15, 0, "中秋节"),
             new LunarHolidayStruct(9, 9, 0, "重阳节"),
             new LunarHolidayStruct(12, 8, 0, "腊八节"),
-            new LunarHolidayStruct(12, 23, 0, "北方小年(扫房)"),
-            new LunarHolidayStruct(12, 24, 0, "南方小年(掸尘)"),
+            new LunarHolidayStruct(12, 23, 0, "北方小年"),
+            new LunarHolidayStruct(12, 24, 0, "南方小年"),
             //new LunarHolidayStruct(12, 30, 0, "除夕")  //注意除夕需要其它方法进行计算
         };
         #endregion
@@ -481,7 +470,52 @@ namespace RecordOverTimeForm
 
         public string ChineseMonthData
         {
-            get { return this._cMonth.ToString() + "月" + this._cDay.ToString(); }
+            get { return this._cMonth == 1 ? "元" : IntToLunar(this._cMonth) + "月" + ToLunarDay(this._cDay); }
+        }
+
+        public string IntToLunar(int num)
+        {
+            switch (num)
+            {
+                case 1: return "一";
+                case 2: return "二";
+                case 3: return "三";
+                case 4: return "四";
+                case 5: return "五";
+                case 6: return "六";
+                case 7: return "七";
+                case 8: return "八";
+                case 9: return "九";
+                case 10: return "十";
+                case 11: return "十一";
+                case 12: return "十二";
+                case 13: return "十一";
+                case 14: return "十二";
+                case 15: return "十一";
+                case 16: return "十二";
+                case 17: return "十一";
+                case 18: return "十二";
+                case 19: return "十一";
+                case 20: return "十二";
+                default: return null;
+            }
+        }
+
+        public string ToLunarDay(int day)
+        {
+            if (day <= 10)
+            {
+                return "初" + IntToLunar(day);
+            }
+            else if (day <= 20)
+            {
+                return IntToLunar(day);
+            }
+            else
+            {
+                var oneday = day % 10 == 0 ? 10 : (day % 10);
+                return IntToLunar(day / 10) + IntToLunar(oneday);
+            }
         }
     }
 }

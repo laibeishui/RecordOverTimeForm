@@ -13,9 +13,13 @@ namespace RecordOverTimeForm.Utils
         /// <param name="day"></param>
         /// <param name="holidays"></param>
         /// <returns></returns>
-        public static dayType GetDayType(DateTime day, List<HolidayDto> holidays)
+        public static DayType GetDayType(DateTime day, List<HolidayDto> holidays)
         {
-            var daytype = dayType.工作;
+            var daytype = DayType.工作;
+            if (daytype == DayType.工作 && (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday))
+            {
+                daytype = DayType.周末;
+            }
             if (!holidays.Any()) return daytype;
 
             var dayStr = day.ToString("yyyy/MM/dd");
@@ -24,18 +28,13 @@ namespace RecordOverTimeForm.Utils
             {
                 if (h.HolidayDays.Contains(dayStr))
                 {
-                    return dayType.假期;
+                    return DayType.假期;
                 }
                 if (h.LeaveinlieuDays.Contains(dayStr))
                 {
-                    return dayType.调休;
+                    return DayType.调休;
                 }
             }
-            if (daytype==dayType.工作&&(day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday))
-            {
-                return dayType.周末;
-            }
-
             return daytype;
         }
 
@@ -43,9 +42,9 @@ namespace RecordOverTimeForm.Utils
         ///  获取假期模型列表
         /// </summary>
         /// <returns></returns>
-        public static List<HolidayDto> GetHolidayList()
+        public static List<HolidayDto> GetHolidayList(int year)
         {
-            return  FileOperations.ReadHolidaysFile();
+            return  FileOperations.ReadHolidaysFile(year);
         }
     }
 
@@ -73,7 +72,7 @@ namespace RecordOverTimeForm.Utils
         public int Duration { get; set; }
     }
 
-    public enum dayType
+    public enum DayType
     {
         工作 = 0,
         假期 = 1,
